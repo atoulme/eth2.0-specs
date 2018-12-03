@@ -72,6 +72,8 @@ overhead.
 
 Convert directly to bytes the size of the int. (e.g. ``uint16 = 2 bytes``)
 
+It is recommended to allocate only as many bytes as the maximum value of the unsigned integer will allow to keep serialized values tightly packed.
+
 All integers are serialized as **big endian**.
 
 | Check to perform       | Code                  |
@@ -123,6 +125,8 @@ return value
 | Length in bytes is correct for `hashN` | ``len(value) == N``  |
 
 ##### hashN
+
+It is recommended to allocate only as many bytes as the hash length required to keep serialized values tightly packed.
 
 ```python
 assert(len(value) == N)
@@ -192,7 +196,7 @@ To serialize:
 
 1. Get the names of the container's fields and sort them.
 
-2. For each name in the sorted list, obtain the corresponding value from the container and serialize it. Place this serialized value into a buffer. The serialized values should be tightly packed.
+2. For each name in the sorted list, obtain the corresponding value from the container and serialize it. Place this serialized value into a buffer.
 
 3. Get the number of raw bytes in the serialized buffer. Encode that number as a `4-byte` **big endian** `uint32`.
 
